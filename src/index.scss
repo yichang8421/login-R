@@ -1,0 +1,64 @@
+@import-normalize ;
+@import "helper";
+* {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+*::before {
+    box-sizing: border-box;
+}
+
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $font-hei;
+    font-size: 16px;
+    line-height: 1.2;
+}
+
+button, input {
+    font: inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+ul, ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+:focus {
+    outline: none;
+}
+
+.icon {
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.oneLine {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
