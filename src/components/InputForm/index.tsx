@@ -46,22 +46,41 @@ type Props = {
     title: string
 }
 
-export default class InputForm extends Component<any, Props> {
+type State = {
+    username: string,
+    password: string
+}
+
+export default class InputForm extends Component<Props, State> {
+    private userName: HTMLInputElement | null;
+    private passWord: HTMLInputElement | null;
+
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            username: "",
+            password: ""
+        };
+        this.userName = null;
+        this.passWord = null;
+    }
+
     render() {
         const {title} = this.props;
         return (
             <>
                 <Input>
                     <Icon></Icon>
-                    <input type="text" placeholder="用户名"/>
+                    <input ref={c => this.userName = c} type="text" placeholder="用户名"/>
                 </Input>
                 <Input>
                     <Icon></Icon>
-                    <input type="password" placeholder="密码"/>
+                    <input ref={c => this.passWord = c} type="password" placeholder="密码"/>
                 </Input>
                 <SubBtn>
-                    <NavLink to={title === "登陆" ? "/" : title === "注册" ? "/login" : "/"}><button
-                        type="submit">{title}</button></NavLink>
+                    <NavLink to={title === "登陆" ? "/login" : title === "注册" ? "/login" : "/"}>
+                        <button type="submit" onClick={() => console.log(this.userName?.value,this.passWord?.value)}>{title}</button>
+                    </NavLink>
                 </SubBtn>
             </>
         );
