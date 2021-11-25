@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import {NavLink} from "react-router-dom";
 import styled from "styled-components";
 import {BorderColor, InputBorder, InputH, InputW} from "../../constents";
+import store from "../../store";
+import {registPassword, registUsername} from "../../store/actions";
 
 const SubBtn = styled.div`
     width: ${InputW};
@@ -66,16 +68,20 @@ export default class InputForm extends Component<Props, State> {
             <>
                 <Input>
                     <Icon></Icon>
-                    <input onChange={(e) => this.setState({username: e.target.value})} type="text" placeholder="用户名"/>
+                    <input onChange={(e) => {
+                        store.dispatch(registUsername({username: e.target.value}));
+                    }} type="text" placeholder="用户名"/>
                 </Input>
                 <Input>
                     <Icon></Icon>
-                    <input onChange={(e) => this.setState({password: e.target.value})} type="password"
+                    <input onChange={(e) => {
+                        store.dispatch(registPassword({password: e.target.value}));
+                    }} type="password"
                            placeholder="密码"/>
                 </Input>
                 <SubBtn>
                     <NavLink to={title === "登陆" ? "/login" : title === "注册" ? "/login" : "/"}>
-                        <button type="submit" onClick={() => console.log(this.state)}>{title}</button>
+                        <button type="submit" onClick={() => console.log(store.getState())}>{title}</button>
                     </NavLink>
                 </SubBtn>
             </>

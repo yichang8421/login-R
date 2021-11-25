@@ -4,6 +4,8 @@ const InputH = "1.5em";
 const InputBorder = "12px";
 const InputW = "70%";
 const BorderColor = "#5dd5c8";
+export const SETUSERNAME = "setUsername";
+export const SETPASSWORD = "setPassword";
 
 const StartFormTitle = styled.div`
   font-weight: bold;
