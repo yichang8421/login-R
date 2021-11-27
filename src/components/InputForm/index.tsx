@@ -54,10 +54,6 @@ type Props = {
 };
 
 class InputForm extends Component<Props> {
-    constructor(props: Props) {
-        super(props);
-    }
-
     render() {
         const {title, username, password, addUsername, addPassword} = this.props;
         return (
