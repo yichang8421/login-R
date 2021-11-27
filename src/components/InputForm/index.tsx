@@ -1,9 +1,10 @@
 import React, {Component} from "react";
 import {NavLink} from "react-router-dom";
 import styled from "styled-components";
+import {connect} from "react-redux";
 import {BorderColor, InputBorder, InputH, InputW} from "../../constents";
-import store from "../../store";
 import {registPassword, registUsername} from "../../store/actions";
+import {State} from "store/types";
 
 const SubBtn = styled.div`
     width: ${InputW};
@@ -45,46 +46,52 @@ const Input = styled.label`
 `;
 
 type Props = {
-    title: string
-}
-
-type State = {
+    title: string,
     username: string,
-    password: string
-}
+    password: string,
+    addUsername: (state: { username: string }) => void,
+    addPassword: (state: { password: string }) => void
+};
 
-export default class InputForm extends Component<Props, State> {
+class InputForm extends Component<Props> {
     constructor(props: Props) {
         super(props);
-        this.state = {
-            username: "",
-            password: ""
-        };
     }
 
     render() {
-        const {title} = this.props;
+        const {title, username, password, addUsername, addPassword} = this.props;
         return (
             <>
                 <Input>
                     <Icon></Icon>
                     <input onChange={(e) => {
-                        store.dispatch(registUsername({username: e.target.value}));
+                        // store.dispatch(registUsername({username: e.target.value}));
+                        addUsername({username: e.target.value});
                     }} type="text" placeholder="用户名"/>
                 </Input>
                 <Input>
                     <Icon></Icon>
                     <input onChange={(e) => {
-                        store.dispatch(registPassword({password: e.target.value}));
+                        // store.dispatch(registPassword({password: e.target.value}));
+                        addPassword({password: e.target.value});
                     }} type="password"
                            placeholder="密码"/>
                 </Input>
                 <SubBtn>
                     <NavLink to={title === "登陆" ? "/login" : title === "注册" ? "/login" : "/"}>
-                        <button type="submit" onClick={() => console.log(store.getState())}>{title}</button>
+                        <button type="submit"
+                                onClick={() => console.log(`usrename:${username}\npassword:${password}`)}>{title}</button>
                     </NavLink>
                 </SubBtn>
             </>
         );
     }
 }
+
+export default connect(
+    (state: State): State => ({...state}),
+    {
+        addUsername: registUsername,
+        addPassword: registPassword
+    }
+)(InputForm);
