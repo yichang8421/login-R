@@ -1,4 +1,6 @@
-import {createStore} from "redux";
-import {registerReducer} from "./reducer";
+import {createStore, combineReducers} from "redux";
+import {registerReducer} from "./reducers/register";
 
-export default createStore(registerReducer);
+const allReducer = combineReducers({register: registerReducer});
+
+export default createStore(allReducer);

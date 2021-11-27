@@ -3,8 +3,8 @@ import {NavLink} from "react-router-dom";
 import styled from "styled-components";
 import {connect} from "react-redux";
 import {BorderColor, InputBorder, InputH, InputW} from "../../constents";
-import {registPassword, registUsername} from "../../store/actions";
-import {State} from "store/types";
+import {registPassword, registUsername} from "../../store/actions/register";
+import {State, RegisterState} from "store/types";
 
 const SubBtn = styled.div`
     width: ${InputW};
@@ -85,7 +85,7 @@ class InputForm extends Component<Props> {
 }
 
 export default connect(
-    (state: State): State => ({...state}),
+    (state: State): RegisterState => ({...state.register}),
     {
         addUsername: registUsername,
         addPassword: registPassword

@@ -1,4 +1,4 @@
-import {SETPASSWORD, SETUSERNAME} from "../constents";
+import {SETPASSWORD, SETUSERNAME} from "../../constents";
 
 const initial = {username: "", password: ""};
 
